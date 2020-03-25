@@ -55,6 +55,7 @@ h1 {
 #game {
     position: relative;
     text-transform: uppercase;
+    margin-bottom: 40px;
 }
 
 aside {
@@ -270,6 +271,10 @@ https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
     margin: 10px 0;
 }
 
+#code-link {
+    font-size: 0.85rem;
+    color: cornflowerblue;
+}
 
 
 /* --- SVGs --- */

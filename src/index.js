@@ -719,6 +719,10 @@ class Game extends React.Component {
                     </HoldingArea>
                 </div>
 
+                <a id="code-link" href="https://github.com/ReduceRightDave/audiodrag">
+                    See the code on Github
+                </a>
+
                 <Overlay {...{currentLevelPicURL}} />
 
                 {/* <p style={{marginTop: '500px'}}>
