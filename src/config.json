@@ -1,0 +1,9 @@
+{
+    "soundFX": [
+        {"name": "success", "file": "soundfx/success-alert.mp3"},
+        {"name": "failure", "file": "soundfx/failure-alert.mp3"},
+        {"name": "gamecompleted", "file": "soundfx/gamecompleted.mp3"},
+        {"name": "levelrestart", "file": "soundfx/levelrestart.mp3"}
+    ],
+    "emptySegmentSilenceDuration": 1.5
+}

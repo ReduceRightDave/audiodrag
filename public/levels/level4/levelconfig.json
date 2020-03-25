@@ -1,0 +1,14 @@
+{
+    "name": "Nicholson: You can't handle the truth",
+    "movesLimit": 10,
+    "timeline": [
+        { "start": 0, "swappable": true, "startInSlot": 5 },
+        { "start": 1.1, "swappable": true },
+        { "start": 4.45, "swappable": true, "startInSlot": 1, "duplicates": [{}]},
+        { "start": 7.8, "swappable": true, "startInSlot": 2 },
+        { "start": 12.5, "swappable": true, "startInSlot": 4 },
+        { "start": 14.4, "swappable": true, "startInSlot": 6, "duplicates": [{"startInSlot": 0}] },
+        { "start": 17.2, "swappable": true, "startInSlot": 3 }
+    ],
+    "hintLink": "https://youtu.be/9FnO3igOkOk?t=40"
+}

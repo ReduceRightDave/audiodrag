@@ -1,0 +1,20 @@
+{
+    "name": "Thatcher: May we bring harmony",
+    "movesLimit": 10,
+    "timeline": [
+        { "start": 0 },
+        { "start": 4.5, "swappable": true },
+        { "start": 5 },
+        { "start": 6.1, "swappable": true, "startInSlot": 1 },
+        { "start": 6.7 },
+        { "start": 7.6, "swappable": true, "startInSlot": 3 },
+        { "start": 8.3 },
+        { "start": 9.2, "swappable": true, "startInSlot": 9 },
+        { "start": 9.8 },
+        { "start": 10.65, "swappable": true, "startInSlot": 7, "duplicates": [{"startInSlot": 11}] },
+        { "start": 11.4 },
+        { "start": 12.4, "swappable": true, "startInSlot": 5 }
+    ],
+    "hintLink": "https://youtu.be/A23PQCndPYU?t=57"
+}
+

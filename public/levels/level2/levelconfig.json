@@ -1,0 +1,15 @@
+{
+    "name": "JFK: We choose to go to the Moon",
+    "movesLimit": 7,
+    "timeline": [
+        { "start": 0 },
+        { "start": 4.7, "swappable": true },
+        { "start": 8.7, "swappable": true, "startInSlot": 4 },
+        { "start": 14.1},
+        { "start": 16.2, "swappable": true, "startInSlot": 1 },
+        { "start": 18.5, "swappable": true, "startInSlot": 2 },
+        { "start": 19.9 },
+        { "start": 22.8, "swappable": true, "startInSlot": 5 }
+    ],
+    "hintLink": "https://youtu.be/kwFvJog2dMw?t=19"    
+}

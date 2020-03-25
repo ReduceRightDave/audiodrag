@@ -1,0 +1,18 @@
+{
+    "name": "Clinton: Did not have relations",
+    "movesLimit": 10,
+    "timeline": [
+        { "start": 0 },
+        { "start": 6.35, "swappable": true, "duplicates": [{"startInSlot": 8}] },
+        { "start": 7.7 },
+        { "start": 10.8, "swappable": true, "startInSlot": 1 },
+        { "start": 11.5 },
+        { "start": 17.5, "swappable": true, "startInSlot": 5 },
+        { "start": 21.5, "swappable": true, "startInSlot": 3 },
+        { "start": 22.3 },
+        { "start": 24.5, "swappable": true, "startInSlot": 6 },
+        { "start": 25.8 }
+    ],
+    "hintLink": "https://youtu.be/kMu-2tXfPQI?t=26"
+}
+

@@ -1,0 +1,11 @@
+{
+    "name": "Introduction",
+    "movesLimit": 3,
+    "timeline": [
+        { "start": 0 },
+        { "start": 1.5, "swappable": true, "duplicates": [{"startInSlot": 1}] },
+        { "start": 3.1, "swappable": true },
+        { "start": 4.83, "swappable": true, "startInSlot": 2 }
+    ]
+}
+

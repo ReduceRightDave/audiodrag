@@ -1,0 +1,15 @@
+{
+    "name": "Chaplin: You are men",
+    "movesLimit": 6,
+    "timeline": [
+        { "start": 0 },
+        { "start": 1.5, "swappable": true, "startInSlot": 5, "duplicates": [{}] },
+        { "start": 3 },
+        { "start": 7.1, "swappable": true, "startInSlot": 1 },
+        { "start": 9.2 },
+        { "start": 13.8, "swappable": true, "startInSlot": 3 },
+        { "start": 16.5, "swappable": true, "startInSlot": 6 },
+        { "start": 19.9 }
+    ],
+    "hintLink": "https://youtu.be/J7GY1Xg6X20?t=104"
+}
