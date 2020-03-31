@@ -15,7 +15,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "audiodrag"
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
