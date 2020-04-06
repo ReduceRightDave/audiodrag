@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import WAAClock from 'waaclock'
+import { clearTimeout, setTimeout } from 'worker-timers'
 import './DragDropTouch'
 import './AudioContextMonkeyPatch'
 import * as Sentry from '@sentry/browser'
@@ -96,11 +96,15 @@ class Game extends React.Component {
     https://stackoverflow.com/questions/46363048/onaudioprocess-not-called-on-ios11/46534088#46534088
     */
     audioContext = new window.AudioContext()
-    clock = new WAAClock(this.audioContext)
     soundFXBuffers = {}
 
     //Later redefined
-    stopScheduledLevelAudioPlay = () => this.WAAClockEvent && this.WAAClockEvent.clear()
+    stopScheduledLevelAudioPlay = () => {
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId)
+            this.timeoutId = 0
+        }
+    }
     stopStandaloneLevelAudioSegment = function() {}
 
     async populateSoundFXBuffers() {
@@ -144,7 +148,10 @@ class Game extends React.Component {
 
         this.stopScheduledLevelAudioPlay = function(shouldCompleteCurrentSegment) {
             const fadeoutDuration = 0.05
-            this.WAAClockEvent.clear()
+            if (this.timeoutId) {
+                clearTimeout(this.timeoutId)
+                this.timeoutId = 0
+            }
 
             if (!wasStopped) {
                 if (shouldCompleteCurrentSegment) {
@@ -228,9 +235,8 @@ class Game extends React.Component {
         this.stopScheduledLevelAudioPlay(false)
 
         const scheduleNextDecisionEvent = (deadline, timelineWasJumped, info) => {
-
-            this.WAAClockEvent = this.clock.callbackAtTime(
-                event => { 
+            this.timeoutId = setTimeout(
+                () => {
                     // SCHEDULING
 
                     segmentIndex += 1
@@ -251,33 +257,33 @@ class Game extends React.Component {
                                 // Drag button is in the right place
                                 if (timelineWasJumped) {
                                     this.stopScheduledLevelAudioPlay(true)
-                                    this.scheduleLevelAudioPlay(event.deadline, segment.start, segment.getButton().duration)
+                                    this.scheduleLevelAudioPlay(deadline, segment.start, segment.getButton().duration)
                                 }
-                                scheduleNextDecisionEvent(segment.getButton().duration + event.deadline /*- this.audioContext.currentTime*/, false, segment.start)
+                                scheduleNextDecisionEvent(segment.getButton().duration + deadline, false, segment.start)
                             } else {
                                 // Drag button is in the wrong place
                                 this.stopScheduledLevelAudioPlay(true)
-                                this.scheduleLevelAudioPlay(event.deadline, segment.getButton().start, segment.getButton().duration)
-                                scheduleNextDecisionEvent(segment.getButton().duration + event.deadline /*- this.audioContext.currentTime*/, true, segment.getButton().start)
+                                this.scheduleLevelAudioPlay(deadline, segment.getButton().start, segment.getButton().duration)
+                                scheduleNextDecisionEvent(segment.getButton().duration + deadline, true, segment.getButton().start)
 
                             }
                         } else {
                             // Empty slot
                             this.stopScheduledLevelAudioPlay(true)
-                            scheduleNextDecisionEvent(config.emptySegmentSilenceDuration + event.deadline, true, segment.start)
+                            scheduleNextDecisionEvent(config.emptySegmentSilenceDuration + deadline, true, segment.start)
 
                         }
                     } else {
                         // Simple timeline segment
                         if (timelineWasJumped) {
                             this.stopScheduledLevelAudioPlay(true)
-                            this.scheduleLevelAudioPlay(event.deadline, segment.start, segment.duration)
+                            this.scheduleLevelAudioPlay(deadline, segment.start, segment.duration)
                         }
-                        scheduleNextDecisionEvent(segment.duration + event.deadline /*- this.audioContext.currentTime*/, false, segment.start)
+                        scheduleNextDecisionEvent(segment.duration + deadline, false, segment.start)
                     }
                 },
-                deadline
-            ).tolerance({ early: 0.1, late: -0.01 })
+                Math.max(0, deadline - 0.2 - this.audioContext.currentTime) * 1000
+            );
         }
 
         let segmentIndex = 0
@@ -500,8 +506,6 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.clock.start()
-
         this.setState({isLoading: true}, () => {
 
             this.populateSoundFXBuffers()
