@@ -282,7 +282,7 @@ class Game extends React.Component {
                         scheduleNextDecisionEvent(segment.duration + deadline, false, segment.start)
                     }
                 },
-                Math.max(0, deadline + 0.2 - this.audioContext.currentTime) * 1000
+                Math.max(0, deadline - 0.2 - this.audioContext.currentTime) * 1000
             );
         }
 
