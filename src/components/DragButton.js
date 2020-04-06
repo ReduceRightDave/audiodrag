@@ -1,7 +1,7 @@
 import React from 'react'
 import { getPlayingSVG } from '.././SVGs'
 
-export class DragButton extends React.Component {
+export default class DragButton extends React.Component {
     dragStartHandler = (event) => {
         
         const dragData = {

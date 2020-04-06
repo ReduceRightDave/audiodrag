@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function Overlay(props) {
+export default function Overlay(props) {
     return (
         <div id="showpic">
             <div id="showpic_content">

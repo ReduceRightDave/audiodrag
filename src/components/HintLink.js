@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function HintLink(props) {
+export default function HintLink(props) {
     if (props.hintLink) {
         return (
             <p id="hint">

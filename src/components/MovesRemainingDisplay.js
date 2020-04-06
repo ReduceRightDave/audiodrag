@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function MovesRemainingDisplay({movesRemaining}) {
+export default function MovesRemainingDisplay({movesRemaining}) {
     return (
         <p 
             id="moves-remaining"

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function PlayButton(props) {
+export default function PlayButton(props) {
     return (
         <button 
             id="play-button" 

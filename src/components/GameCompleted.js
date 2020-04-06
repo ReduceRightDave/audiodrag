@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function GameCompleted(props) {
+export default function GameCompleted(props) {
     return (
         <section id="gamecompleted"> 
             <h1>You completed the game!</h1>

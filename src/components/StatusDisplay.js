@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function StatusDisplay(props) {
+export default function StatusDisplay(props) {
     let content,
         restartButton = <button onClick={props.restartLevel}>Restart</button>
 

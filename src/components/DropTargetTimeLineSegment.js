@@ -1,7 +1,7 @@
 import React from 'react'
 import { getMutedSVG } from '.././SVGs'
 
-export function DropTargetTimeLineSegment(props) {
+export default function DropTargetTimeLineSegment(props) {
     const dropDisabled = props.isActive || props.children
     return (
         <div
