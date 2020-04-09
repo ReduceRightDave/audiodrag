@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AudioContext } from 'standardized-audio-context'
 import { clearTimeout, setTimeout } from 'worker-timers'
 import './DragDropTouch'
-import './AudioContextMonkeyPatch'
 import * as Sentry from '@sentry/browser'
 import { 
     SimpleTimeLineSegmentModel,
@@ -95,7 +95,7 @@ class Game extends React.Component {
     Safari on iOS 11 seems to automatically suspend new AudioContext's that aren't created in response to a tap
     https://stackoverflow.com/questions/46363048/onaudioprocess-not-called-on-ios11/46534088#46534088
     */
-    audioContext = new window.AudioContext()
+    audioContext = new AudioContext()
     soundFXBuffers = {}
 
     //Later redefined
