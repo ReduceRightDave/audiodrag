@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { AudioContext } from 'standardized-audio-context'
+import { AudioBufferSourceNode, AudioContext, GainNode } from 'standardized-audio-context'
 import { clearTimeout, setTimeout } from 'worker-timers'
 import './DragDropTouch'
 import * as Sentry from '@sentry/browser'
@@ -115,19 +115,8 @@ class Game extends React.Component {
             for (let i=0, length=responses.length; i<length; i++) {
                 const arrayBuffer = await responses[i].arrayBuffer()
                 const name = config.soundFX[i].name
-                
-                // Safari doesn't accept the promise-based version of decodeAudioData
-                this.soundFXBuffers[name] = await new Promise((resolve, reject) => {
-                    this.audioContext.decodeAudioData(
-                        arrayBuffer, 
-                        audioBuffer => { 
-                            resolve(audioBuffer)
-                        },
-                        error => {
-                            reject(error)
-                        }
-                    )
-                })
+
+                this.soundFXBuffers[name] = await this.audioContext.decodeAudioData(arrayBuffer)
             }
         } catch(error) {
             Sentry.captureException(error)
@@ -138,11 +127,9 @@ class Game extends React.Component {
     scheduleLevelAudioPlay(when, offset, duration) {
         // Duration is used only to stop audio
 
-        // const gainNode = new GainNode(this.audioContext) //MS Edge says no
-        const gainNode = this.audioContext.createGain()
+        const gainNode = new GainNode(this.audioContext)
 
-        const audioSource = this.audioContext.createBufferSource()
-        audioSource.buffer = this.currentLevelAudioBuffer
+        const audioSource = new AudioBufferSourceNode(this.audioContext, { buffer: this.currentLevelAudioBuffer })
 
         let wasStopped = false
 
@@ -332,8 +319,7 @@ class Game extends React.Component {
         
         this.setStopAnimationTime(this.audioContext.currentTime + duration)
 
-        // const gainNode = new GainNode(this.audioContext) //MS Edge says no
-        const gainNode = this.audioContext.createGain()
+        const gainNode = new GainNode(this.audioContext)
 
         const now = this.audioContext.currentTime
 
@@ -346,8 +332,7 @@ class Game extends React.Component {
         gainNode.gain.setValueAtTime(1, endTime - fadeOutDuration)
         gainNode.gain.linearRampToValueAtTime(0, endTime)
 
-        const audioSource = this.audioContext.createBufferSource()
-        audioSource.buffer = this.currentLevelAudioBuffer
+        const audioSource = new AudioBufferSourceNode(this.audioContext, { buffer: this.currentLevelAudioBuffer })
 
         let wasStopped = false
 
@@ -412,18 +397,7 @@ class Game extends React.Component {
 
                     const arrayBuffer = await responses[1].arrayBuffer()
 
-                    // Safari doesn't accept the promise-based version of decodeAudioData
-                    this.currentLevelAudioBuffer = await new Promise((resolve, reject) => {
-                        this.audioContext.decodeAudioData(
-                            arrayBuffer, 
-                            audioBuffer => { 
-                                resolve(audioBuffer)
-                            },
-                            error => {
-                                reject(error)
-                            }
-                        )
-                    })
+                    this.currentLevelAudioBuffer = await this.audioContext.decodeAudioData(arrayBuffer)
 
                     const imageBlob = await responses[2].blob()
                     if (imageBlob.type.split('/')[0] !== 'image') {
@@ -533,8 +507,8 @@ class Game extends React.Component {
     }
     
     simplePlaySound(audioBuffer) {
-        const audioSource = this.audioContext.createBufferSource()
-        audioSource.buffer = audioBuffer
+        const audioSource = new AudioBufferSourceNode(this.audioContext, { buffer: audioBuffer })
+
         audioSource.connect(this.audioContext.destination)
         audioSource.start()
     }
