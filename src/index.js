@@ -29,7 +29,7 @@ import config from './config.json'
 
 const errorMessageJSX = <>
     <h1>An error occurred :(</h1>
-    <p>It's been sent to us and we're on it! Please visit again.</p>
+    <p>Please check your connection and try again.</p>
 </>
 
 /*
