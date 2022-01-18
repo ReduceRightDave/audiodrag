@@ -665,6 +665,7 @@ class Game extends React.Component {
         return (
             <>
                 <h1>AudioDrag</h1>
+                <p id='tested-in'>Tested in Firefox, Opera, Edge and Chrome</p>
                 <div id="game">
                     <aside>  {/* TODO Rename / refactor to StatusDisplayAndControls */ }
                         <StatusDisplay

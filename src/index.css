@@ -52,6 +52,11 @@ h1 {
     text-shadow: 1px 1px #999;
 }
 
+#tested-in {
+    font-size: 85%;
+    text-align: center;
+}
+
 #game {
     position: relative;
     text-transform: uppercase;
